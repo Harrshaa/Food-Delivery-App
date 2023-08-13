@@ -1,0 +1,35 @@
+{
+  "name": "food_delivery_app",
+  "version": "1.0.0",
+  "description": "Food Delivery APP like Swiggy ",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harrshaa/Namaste_React.git"
+  },
+  "keywords": [
+    "React",
+    "Functional",
+    "Componenets"
+  ],
+  "author": "akshay saini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Harrshaa/Namaste_React/issues"
+  },
+  "homepage": "https://github.com/Harrshaa/Namaste_React#readme",
+  "devDependencies": {
+    "cssnano": "^6.0.1",
+    "parcel": "^2.9.2",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.1"
+  }
+}

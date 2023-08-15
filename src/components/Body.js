@@ -2,7 +2,7 @@ import React from "react";
 import { ReactDOM } from "react";
 import { useState,useEffect} from "react";
 import resList from "../utils/mockData";
-import RestaurentCard from "./Restaurentcard";
+import RestaurentCard,{withPromotedLabel} from "./Restaurentcard";
 import Shimmer from "./Shimmer";
 
 import { Link } from "react-router-dom";
@@ -14,7 +14,9 @@ const Body =()=>{
     //Local State Variable - Super Powerful Variable//
     const [listOfRestaurents,setlistOfRestaurents]=useState([]);
     const [filteredRestaurents,setfilteredRestaurents]=useState([]);
-    const [searchText,setsearchText]=useState("");   
+    const [searchText,setsearchText]=useState("");
+
+    const RestaurantCardPromoted = withPromotedLabel(RestaurentCard);      
      
 
     useEffect(()=>{
@@ -25,7 +27,7 @@ const Body =()=>{
     const fetchData = async()=>{
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING");
         const json =await data.json();
-        // console.log(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants);
+        console.log(json);
         //Optional Chaining//
         setlistOfRestaurents(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setfilteredRestaurents(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
@@ -57,19 +59,29 @@ const Body =()=>{
                     );
                     setlistOfRestaurents(filteredList);               
                     }}>Top Rated Restaurents</button>
-
             </div>
             
-         </div>
-         
+            </div>
 
 
 
             <div className='res-container flex  flex-wrap'>              
                 {filteredRestaurents.map((restaurent)=>(
-                <Link to={"/restaurants/"+restaurent.info.id}><RestaurentCard key={restaurent.info.id} resData ={restaurent} /></Link>
+                <Link
+                 key={restaurent?.info.id}
+                 to={"/restaurants/"+restaurent.info.id}
+                 >
+                    {restaurent?.info.promoted ? (
+                        <RestaurantCardPromoted resData={restaurent} />
+                    ):(
+                        <RestaurentCard resData ={restaurent} />
+                    )}             
+                </Link>
+
                 ))}              
             </div>
+
+
             </div>
 
 

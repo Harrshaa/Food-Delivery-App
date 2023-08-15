@@ -35,11 +35,11 @@ const Body =()=>{
     return(
          <div className='body'>
             
-            <div className='filter'>
+            <div className='filter flex'>
 
-            <div className="search">
-                <input type="text" className="search-box" placeholder="search it" value={searchText} onChange={(e)=>{setsearchText(e.target.value)}}/>
-                <button className="searchButton" onClick={()=>{
+            <div className="search  m-1 p-1 flex items-center">
+                <input type="text" className="border border-solid border-black" placeholder="" value={searchText} onChange={(e)=>{setsearchText(e.target.value)}}/>
+                <button className="px-4 py-2 bg-green-100 m-4 rounded-lg" onClick={()=>{
                     //Filter the Restaurent cards and update UI//
                     const filtered=listOfRestaurents.filter(
                         (res)=>res.info.name.toLowerCase().includes(searchText)
@@ -48,9 +48,9 @@ const Body =()=>{
                     
                 }}>Search</button>
             </div>
-
             
-            <button className="filter-btn" 
+            <div>
+            <button className="px-4 py-2 bg-green-100 m-4 rounded-lg" 
                 onClick={()=>{
                     const filteredList=listOfRestaurents.filter(
                         (res)=> res.info.avgRating >4                       
@@ -59,18 +59,21 @@ const Body =()=>{
                     }}>Top Rated Restaurents</button>
 
             </div>
+            
+         </div>
+         
 
 
 
-            <div className='res-container'>              
+            <div className='res-container flex  flex-wrap'>              
                 {filteredRestaurents.map((restaurent)=>(
                 <Link to={"/restaurants/"+restaurent.info.id}><RestaurentCard key={restaurent.info.id} resData ={restaurent} /></Link>
                 ))}              
             </div>
+            </div>
 
 
 
-         </div>
     );
 }
  export default Body;

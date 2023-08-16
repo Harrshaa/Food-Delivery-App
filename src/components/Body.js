@@ -71,7 +71,7 @@ const Body =()=>{
                  key={restaurent?.info.id}
                  to={"/restaurants/"+restaurent.info.id}
                  >
-                    {restaurent?.info.promoted ? (
+                    {(restaurent?.info.avgRating > 4.5) ? (
                         <RestaurantCardPromoted resData={restaurent} />
                     ):(
                         <RestaurentCard resData ={restaurent} />

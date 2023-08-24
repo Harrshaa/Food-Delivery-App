@@ -20,8 +20,8 @@ const RestaurantMenu = () => {
     //     setResInfo(json.data);
     //     console.log(resInfo) ;       
     // };
-
-
+    const dummy= "Dummy Data";
+    const [showIndex,setShowIndex]= useState(1);
     const {resId} =useParams();
     const resInfo =useRestaurantMenu(resId)
     if(resInfo === null) return <Shimmer />;
@@ -47,8 +47,15 @@ const RestaurantMenu = () => {
         <h3>{costForTwoMessage}</h3>
 
         {/* Categories Accordions */}
-        {categories.map((category)=>
-            <RestaurantCategory  data={category?.card.card} />
+        {categories.map((category,index)=>
+            //Controllled Component//
+            <RestaurantCategory  
+            key={category?.card?.card.title}            
+            data={category?.card.card}
+            showItems={index=== showIndex ? true:false}
+            setShowIndex={()=> setShowIndex(index)} 
+            dummy={dummy}/>
+            
         )}
 
 

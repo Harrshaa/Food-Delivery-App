@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
-
+import UserContext from "../utils/UserContext";
 const Header=()=>{
+
+    const {loggedInUser} =useContext(UserContext);
+    console.log(loggedInUser);
         
     let [btnName,setbtnName]=useState("login");
     return(
@@ -29,6 +32,8 @@ const Header=()=>{
                         setbtnName("login");
                         
                     }}>{btnName}</button>
+
+                    <li className="px-4">{loggedInUser}</li>
                 </ul>
             </div>
         </div>

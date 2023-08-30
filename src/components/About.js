@@ -1,6 +1,8 @@
 import UserClass from "./UserClass";
 import User from "./user";
 import React from "react";
+import UserContext from "../utils/UserContext";
+
 
 class About extends React.Component{
     constructor(props){
@@ -24,15 +26,15 @@ class About extends React.Component{
         this.setState({
             userInfo:json,
         })
-        console.log(json);
+        // console.log(json);
     }
 
     componentDidUpdate(){
-        console.log("component did update");
+        // console.log("component did update");
     }
 
     componentWillUnmount(){
-        console.log("Component got unMounted")
+        // console.log("Component got unMounted")
     }
 
 
@@ -44,6 +46,18 @@ class About extends React.Component{
             <div>            
             <h1>About</h1>
             <h2>This is Namaste React Web Series</h2>
+
+
+            <div>
+            LoggedIn User
+            <UserContext.Consumer>
+            {({ loggedInUser }) => (
+              <h1 className="text-xl font-bold">{loggedInUser}</h1>
+            )}
+            </UserContext.Consumer>
+            </div>
+
+
             <img src={avatar_url}></img>
             <h3>{name}</h3>
             <h3>{location}</h3>
@@ -56,7 +70,7 @@ class About extends React.Component{
     }
 }
 
-
+export default About;
 
 
 // const About =()=>{
@@ -69,7 +83,7 @@ class About extends React.Component{
 //         </div>
 //     )
 // }
-export default About;
+
 
 
 

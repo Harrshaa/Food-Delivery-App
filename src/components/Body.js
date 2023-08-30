@@ -1,17 +1,24 @@
 import React from "react";
 import { ReactDOM } from "react";
-import { useState,useEffect} from "react";
+import { useState,useEffect,useContext} from "react";
 import resList from "../utils/mockData";
 import RestaurentCard,{withPromotedLabel} from "./Restaurentcard";
 import Shimmer from "./Shimmer";
-
 import { Link } from "react-router-dom";
+
+// import User from "./user";
+import UserContext from "../utils/UserContext";
+
+
+
+
 
 
  
 
 const Body =()=>{
     //Local State Variable - Super Powerful Variable//
+    
     const [listOfRestaurents,setlistOfRestaurents]=useState([]);
     const [filteredRestaurents,setfilteredRestaurents]=useState([]);
     const [searchText,setsearchText]=useState("");
@@ -27,13 +34,16 @@ const Body =()=>{
     const fetchData = async()=>{
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING");
         const json =await data.json();
-        console.log(json);
+        // console.log(json);
         //Optional Chaining//
         setlistOfRestaurents(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setfilteredRestaurents(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     };
 
+    const {loggedInUser,setUserName} =useContext(UserContext);
 
+
+    
     return(
          <div className='body'>
             
@@ -52,7 +62,7 @@ const Body =()=>{
             </div>
             
             <div>
-            <button className="px-4 py-2 bg-green-100 m-4 rounded-lg" 
+            <button className="search m-4 p-4 flex items-center" 
                 onClick={()=>{
                     const filteredList=listOfRestaurents.filter(
                         (res)=> res.info.avgRating >4                       
@@ -60,8 +70,21 @@ const Body =()=>{
                     setlistOfRestaurents(filteredList);               
                     }}>Top Rated Restaurents</button>
             </div>
+
+            <div className=" search m-4 p-4 flex items-center">
+                <label>UserName: </label>
+                <input 
+                className="border border-black p-2"
+                value={loggedInUser}
+                onChange={(e)=> setUserName(e.target.value)}                
+                />
+                
+            </div>
             
             </div>
+
+            
+
 
 
 

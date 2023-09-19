@@ -2,10 +2,17 @@ import { useState,useContext } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import UserContext from "../utils/UserContext";
-const Header=()=>{
+import { useSelector } from "react-redux";
 
+
+const Header=()=>{
     const {loggedInUser} =useContext(UserContext);
     console.log(loggedInUser);
+
+    //Subscribing to the store using a selector//
+    const cartItems = useSelector(store => store.cart.items);
+    console.log(cartItems);
+
         
     let [btnName,setbtnName]=useState("login");
     return(
@@ -24,7 +31,10 @@ const Header=()=>{
                     <li className="px-4"> 
                         <Link to="/contact">Contact Us</Link>
                     </li>
-                    <li className="px-4">Cart</li>
+
+                    <li className="px-4 font-bold">
+                        <Link to="/cart">Cart {cartItems.length}</Link>
+                    </li>
                     
                     <button className="px-4" onClick={()=>{
                         if(btnName==="login") setbtnName("logOut");

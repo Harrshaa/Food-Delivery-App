@@ -2,7 +2,7 @@ import { useState } from "react";
 import ItemList from "./ItemList";
 
 const RestaurantCategory =({data,showItems,setShowIndex,dummy})=>{
-    // console.log(data);
+    console.log(data);
     const handleClick=()=>{
         setShowIndex();              
     };
@@ -19,7 +19,7 @@ const RestaurantCategory =({data,showItems,setShowIndex,dummy})=>{
                 <span className="font-bold">{data.title} ({data.itemCards.length})</span>
                 <span>⬇️</span>
             </div>
-            {showItems && < ItemList items={data.itemCards} dummy={dummy}/>}              
+            < ItemList items={data.itemCards}/>           
                 
             </div>
             {/* Accordion Body */}           
